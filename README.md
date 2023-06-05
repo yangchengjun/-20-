@@ -228,13 +228,20 @@ sudo tar jxvf /mnt/hgfs/shareVM/arm-2009q1-203-arm-none-linux-gnueabi-i686-pclin
 修改系统环境变量：
 sudo gedit /etc/profile
 在 profile 文件最后添加以下语句：
-export PATH=$PATH:/homg/yang/arm-2009q1/arm-none-linux-gnueabi/bin
+export PATH=$PATH:/home/yang/arm-2009q1/bin
 环境生效：
 source /etc/profile & sudo reboot
 查看是否安装成功：
 arm-none-linux-gnueabi-gcc -v
 ```
+如果查看到明显路径没有错误，也告诉说没有此文件：
+```
+sudo apt-get install lib32ncurses5 
+sudo apt-get install lib32z1
 
+arm-none-linux-gnueabi-gcc -v
+gcc version 4.3.3 (Sourcery G++ Lite 2009q1-203)
+```
 
 
 
