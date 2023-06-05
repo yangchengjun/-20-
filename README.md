@@ -131,9 +131,11 @@ windos可以用xftp共享文件：（虚拟机也可以用共享文档）
 - 需演示
 ## 2.1拨码开关
 - 需演示
+![图 1](images/22e37204b580216f257ce080a5fc14148ba84a2c222aa50a98d03f5ba68e8b76.png)  
+
 ## 2.2win11驱动串口驱动
-http://www.prolific.com.tw/US/ShowProduct.aspx?p_id=223&pcid=126
-或者使用CH341
+WIN11使用PL2303
+或者WIN10使用CH340
 
 ## 2.3实验箱中的hellowold
 ### 查看试验箱IP地址
