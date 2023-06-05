@@ -136,6 +136,62 @@ http://www.prolific.com.tw/US/ShowProduct.aspx?p_id=223&pcid=126
 或者使用CH341
 
 ## 2.3实验箱中的hellowold
+### 查看试验箱IP地址
+```
+root@omapl138-Tronlong:/# ifconfig
+eth0      Link encap:Ethernet  HWaddr 16:01:40:12:6a:ef
+          inet addr:192.168.1.55  Bcast:0.0.0.0  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:100340 errors:0 dropped:4720 overruns:0 frame:0
+          TX packets:2 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:7041229 (6.7 MiB)  TX bytes:656 (656.0 B)
+          Interrupt:33
+
+lo        Link encap:Local Loopback
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:168 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:168 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0
+          RX bytes:221739 (216.5 KiB)  TX bytes:221739 (216.5 KiB)
+
+```
+如果没有输出192.168.1.55类似的IP,需要重启网络重新获取IP
+```
+root@omapl138-Tronlong:/# /etc/init.d/networking restart
+Reconfiguring network interfaces... [   68.230618] davinci_mdio davinci_mdio.0: resetting idled controller
+[   68.255581] net eth0: attached PHY driver [SMSC LAN8710/LAN8720] (mii_bus:phy_addr=davinci_mdio-0:00, id=7c0f1)
+udhcpc (v1.20.2) started
+Sending discover...
+[   70.255717] PHY: davinci_mdio-0:00 - Link is Up - 100/Full
+Sending discover...
+Sending select for 192.168.1.123...
+Lease of 192.168.1.123 obtained, lease time 7200
+/etc/udhcpc.d/50default: Adding DNS 192.168.1.1
+/etc/udhcpc.d/50default: Adding DNS 0.0.0.0
+done.
+```
+如果输入ifconfig，虚拟机说没有net-tools
+```
+sudo apt-get install net-tools
+```
+链接试验箱：
+```
+ssh root@192.168.1.123
+The authenticity of host '192.168.1.123 (192.168.1.123)' can't be established.
+RSA key fingerprint is SHA256:C7yUL9sT5T2aLXjMT+GwjRHPXkZMXowdPapYLSt1p5A.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.1.123' (RSA) to the list of known hosts.
+root@192.168.1.123's password: TL
+
+root@omapl138-Tronlong:~# 
+
+```
+
+
+
+
 ###查看虚拟机自带的gcc
 ```
 1-查看gcc版本
@@ -153,6 +209,18 @@ gcc hellow.c
 gcc hellow.c -o hellow
 
 ```
+不用交叉编译直接发送文件：
+```
+yang@ubuntu:~/Desktop/code/hellow$ scp hellowold root@192.168.1.123:
+root@192.168.1.123's password: 
+hellowold
+
+并没有输出hellow，而是段错误：
+root@omapl138-Tronlong:~# ./hellowold 
+./hellowold: line 16: syntax error: EOF in backquote substitution
+```
+
+
 ###gcc与arm-gcc的关系
 ```
 解压：
@@ -166,6 +234,14 @@ source /etc/profile & sudo reboot
 查看是否安装成功：
 arm-none-linux-gnueabi-gcc -v
 ```
+
+
+
+
+
+
+
+
 交叉编译hellow.c
 ```
 使用gcc编译器，编译hellow.c文件，-o（-out输出为：hellow-x86xxx名字的可执行文件），这个文件可以再x86端运行。
