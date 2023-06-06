@@ -23,6 +23,8 @@
 |chmod|权限控制|sudo chmod +x 添加可执行权限|
 |Tab|自动补全||
 |CTRL+Alt+T|打开terminal控制台||
+|insmod|安装驱动|insmod led.ko安装LED灯的驱动|
+|rmmod|卸载驱动|rmmod led.ko卸载led驱动|
 
 ## 1.4文件系统
 tree -L 1
@@ -225,10 +227,10 @@ root@omapl138-Tronlong:~# ./hellowold
 ```
 
 
-###gcc与arm-gcc的关系
+###gcc与arm-gcc的关系，如何安装交叉编译工具
 ```
 解压：
-sudo tar jxvf /mnt/hgfs/shareVM/arm-2009q1-203-arm-none-linux-gnueabi-i686-pclinux-gnu.tar.bz2 -C ~
+sudo tar jxvf /home/yang/Desktop/tools/arm-2009q1-203-arm-none-linux-gnueabi-i686-pc-linux-gnu.tar.bz2 -C ~
 修改系统环境变量：
 sudo gedit /etc/profile
 在 profile 文件最后添加以下语句：
