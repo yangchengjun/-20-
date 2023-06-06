@@ -20,7 +20,9 @@
 |unzip|解压|unzip filename.zip|
 |||zip -r FileName.zip DirName|
 ||解压|tar -xvf FileName.tar.gz（-j 压缩和解压缩 ".tar.bz2" 格式 -z 压缩和解压缩 ".tar.gz" 格式）|
-||||
+|chmod|权限控制|sudo chmod +x 添加可执行权限|
+|Tab|自动补全||
+|CTRL+Alt+T|打开terminal控制台||
 
 ## 1.4文件系统
 tree -L 1
